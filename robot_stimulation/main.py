@@ -10,6 +10,7 @@ if __name__=="__main__":
     control1=Control()
 
     data=sensor1.get_data()
+    print("采集数据:",data)
     judge_data=processor1.judge_state(data)
     control1.get_cmd(judge_data)
 
