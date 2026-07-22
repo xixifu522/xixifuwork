@@ -1,12 +1,18 @@
-from robot.control import  control_test
-from robot.processor import processor_test
-from robot.sensor import sensor_test
+from robot import Sensor,Processor,Control
+if __name__=="__main__":
+    time_inter=2
+    temp_thres=40
+    dist_thres=4
+    bat_thress=75
 
-if __name__ == "__main__":
-    print("机器人启动")
-    data = sensor_test()
-    stat = processor_test(data)
-    action = control_test(stat)
-    print("运行结束")
+    sensor1=Sensor(time_inter,temp_thres,dist_thres,bat_thress)
+    processor1=Processor(temp_thres,dist_thres,bat_thress)
+    control1=Control()
+
+    data=sensor1.get_data()
+    judge_data=processor1.judge_state(data)
+    control1.get_cmd(judge_data)
+
+
 
 
