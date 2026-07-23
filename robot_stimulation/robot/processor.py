@@ -1,3 +1,6 @@
+import logging
+log=logging.getLogger(__name__)
+
 class Processor:
     def __init__(self,temp_thres,dist_thres,bat_thres):
         self.temp=temp_thres
@@ -9,11 +12,12 @@ class Processor:
         dist=data["dist"]
         bat=data["bat"]
         if temp > self.temp:
-           return "高温预警"
+           state= "高温预警"
         elif dist < self.dist:
-            return"有障碍，停车"
+            state="有障碍，停车"
         elif bat < self.bat:
-            return"电量低，返航"
+            state="电量低，返航"
         else:
-            return "正常运行"
-        
+            state= "正常运行"
+        log.info(f"处理器接受数据{data},判断结果{state}")
+        return state
